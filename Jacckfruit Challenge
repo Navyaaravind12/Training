@@ -1,0 +1,5 @@
+n,d=map(int,input("").split())
+w=list(map(int,input("").split()))
+w.sort(reverse=True)
+max_jam=sum(w[:d])
+print(max_jam)
