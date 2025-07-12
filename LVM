@@ -1,0 +1,38 @@
+n=int(input())
+stack=[]
+reg=0
+lmv=[]
+pointer=0
+
+for i in range(n):
+    instr=input("")
+    lmv.append(instr)
+while pointer<n:
+    i=lmv[pointer]
+    jump=False
+    
+    if i[0:4]=="PUSH":
+        stack.insert(0,int(i[5:]))
+    elif i=="STORE":
+        reg=stack.pop(0)
+        
+    elif i=="LOAD":
+        stack.insert(0,reg)
+    elif i=="PLUS":
+        sum=stack[0]+stack[1]
+        stack.insert(0,sum)
+        del stack[1:3]
+    elif i=="TIMES":
+        stack.insert(0,(stack[0]*stack[1]))
+        del stack[1:3]
+    elif i[0:6]=="IFZERO":
+        if stack:
+            top=stack.pop(0)
+        if top==0:
+            pointer=int(i[7:])
+            jump=True
+        
+    elif i=="DONE":
+        print(stack[0])
+    if not jump:
+        pointer+=1
